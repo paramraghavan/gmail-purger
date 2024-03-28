@@ -7,6 +7,83 @@ gmail is almost full, time to cleanup:
 
 > I will be using poetry
 
+## new  poetry project
+
+>> reference: https://python-poetry.org/docs/basic-usage/
+
+First, let’s create our new project, let’s call it poetry-demo:
+```shell
+poetry new poetry-demo
+```
+
+This will create the poetry-demo directory with the following content:
+```text
+poetry-demo
+├── pyproject.toml
+├── README.md
+├── poetry_demo
+│   └── __init__.py
+└── tests
+    └── __init__.py
+```
+
+The pyproject.toml file is what is the most important here. This will orchestrate your project and its dependencies.
+For now, it looks like this:
+
+```text
+[tool.poetry]
+name = "poetry-demo"
+version = "0.1.0"
+description = ""
+authors = ["Sébastien Eustace <sebastien@eustace.io>"]
+readme = "README.md"
+packages = [{include = "poetry_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+```
+
+Poetry assumes your package contains a package with the same name as tool.poetry.name located in the root of your
+project. If this is not the case, populate tool.poetry.packages to specify your packages and their locations.
+
+Similarly, the traditional MANIFEST.in file is replaced by the tool.poetry.readme, tool.poetry.include, and
+tool.poetry.exclude sections. tool.poetry.exclude is additionally implicitly populated by your .gitignore. For full
+documentation on the project format, see the pyproject section of the documentation.
+
+Poetry will require you to explicitly specify what versions of Python you intend to support, and its universal locking
+will guarantee that your project is installable (and all dependencies claim support for) all supported Python versions.
+
+### If you want to add dependencies to your project, you can specify them in the tool.poetry.dependencies section.
+```text
+[tool.poetry.dependencies]
+pendulum = "^2.1"
+```
+
+As you can see, it takes a mapping of package names and version constraints. Poetry uses this information to search for
+the right set of files in package “repositories” that you register in the tool.poetry.source section, or on PyPI by
+default.
+
+## Also, instead of modifying the pyproject.toml file by hand, you can use the add command.
+```shell
+$ poetry add pendulum
+````
+
+## Initialising a pre-existing project
+
+Instead of creating a new project, Poetry can be used to ‘initialise’ a pre-populated directory. To interactively create
+a pyproject.toml file in directory pre-existing-project:
+```shell
+cd pre-existing-project
+poetry init
+````
+## If you venv is active use pip
+If you venv is active use pip
+
+
 ## how to use poetry
 - **Installation**: First, you need to install Poetry. After installation, make sure to add Poetry's bin directory to your PATH.
   You can do this by running the following command in your terminal:
@@ -204,3 +281,74 @@ for managing dependencies.
 
 > Referenced from here:
 > https://www.linkedin.com/pulse/comparison-various-tools-manage-python-packages-virtual-mukesh-kumar/
+
+## To use a Conda environment YAML file with Poetry, you can follow these steps:
+
+**Create and Activate Conda Environment:** First, create a Conda environment using the YAML file and activate it. This
+ensures that the correct Python version and dependencies are used when setting up Poetry.
+
+```sh
+conda env create -f environment.yml
+conda activate your_env_name
+```
+
+**Initialize Poetry:** In your project directory, initialize Poetry. This will create a pyproject.toml file for your
+project. If you already have a pyproject.toml file, you can skip this step.
+
+```sh
+poetry init
+```
+
+During initialization, you can specify dependencies, but since you're using a Conda environment, you might want to skip
+this and manually add dependencies later.
+
+**Add Dependencies:** If there are additional dependencies that are not included in your Conda environment but are
+required for your project, you can add them using Poetry. For example:
+
+```sh
+poetry add requests
+```
+Poetry will manage these dependencies separately from your Conda environment.
+
+**Install Dependencies:** Run the following command to install the dependencies specified in your pyproject.toml file.
+Since you're using a Conda environment, make sure it's activated before running this command.
+
+```sh
+poetry install
+```
+
+**Run Your Project:** With your Conda environment activated and Poetry set up, you can now run your project using the
+Python interpreter from the Conda environment and dependencies managed by both Conda and Poetry.
+
+By following these steps, you can use a Conda environment alongside Poetry for your project. This allows you to leverage
+Conda for environment management and Poetry for dependency management.
+
+
+
+## **Replace Conda Environment with poetry:** 
+Actiavte Conda environment using the YAML file
+
+```sh
+conda env create -f environment.yml
+conda activate your_env_name
+```
+
+**Initialize Poetry:** In your project directory, initialize Poetry. This will create a pyproject.toml file for your
+project. If you already have a pyproject.toml file, you can skip this step.
+
+```sh
+poetry init
+```
+
+**Dump current dependencies**: dump out a pip list --format=freeze. This could help with resolving any tricky packages
+that use different names in Conda versus PyPI.
+```shell
+pip list --format=freeze > curr_dependencies.txt
+```
+
+**update the pyproject.toml**
+Open the pyproject.toml and add all the dependencies from above file curr_depemdencies.txt  under the section
+**[tool.poetry.dependencies]** in file pyproject.toml
+
+
+
