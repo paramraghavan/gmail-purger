@@ -99,3 +99,12 @@ gmail is almost full, time to cleanup:
     # This command will list all the packages installed in your project's virtual environment, along with their versions
     poetry show --tree
    ```
+
+   - **generate a requirements.txt**
+   ```sh
+     # to generate a requirements.txt file similar to using pipenv lock -r, you can use the poetry export
+     poetry export -f requirements.txt --output requirements.txt
+     # If you want to include only the main dependencies and exclude the development dependencies, you can add the --without dev
+     poetry export -f requirements.txt --output requirements.txt --without dev
+    ```
+
