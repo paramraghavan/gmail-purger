@@ -12,6 +12,8 @@ gmail is almost full, time to cleanup:
   You can do this by running the following command in your terminal:
   ```sh
   curl -sSL https://install.python-poetry.org | python3 -
+  # show poetry version
+  poetry --version
   ```
 - **Initialize Poetry:** Navigate to your project directory and initialize Poetry by running:
   ```sh
