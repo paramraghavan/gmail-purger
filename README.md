@@ -59,6 +59,7 @@ poetry env list
 - **Like pipenv clean**
   In Poetry, there is no direct equivalent to the pipenv clean command, which removes packages not specified in the Pipfile.
   However, you can achieve a similar result by using the poetry install command with the --remove-untracked option.
+
   This option will remove packages that are **not specified in the pyproject.toml** file from the virtual environment.
   Following will ensure that your virtual environment only contains the packages specified in your pyproject.toml file,
   similar to how pipenv clean works for Pipfile.
