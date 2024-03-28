@@ -54,7 +54,7 @@ gmail is almost full, time to cleanup:
     poetry env list
     ```
 
-    - **Like pipenv clean**
+  - **Like pipenv clean**
       In Poetry, there is no direct equivalent to the pipenv clean command, which removes packages not specified in the Pipfile.
       However, you can achieve a similar result by using the poetry install command with the --remove-untracked option.
       This option will remove packages that are **not specified in the pyproject.toml** file from the virtual environment.
@@ -64,7 +64,7 @@ gmail is almost full, time to cleanup:
       poetry install --remove-untracked
       ```
 
-      - **Like pipenv install --dev**
+  - **Like pipenv install --dev**
        In Poetry, to install development dependencies, you use the poetry add command with the --dev flag. This is similar
        to how you would use pipenv install --dev in Pipenv. Here's an example:
         ```sh
@@ -73,7 +73,7 @@ gmail is almost full, time to cleanup:
         _Above command will add pytest as a development dependency to your project, updating the pyproject.toml and poetry.lock
         files accordingly._
       
-     - ** Remove the Virtual Environment**
+  - **Remove the Virtual Environment**
        Use the poetry env remove command to remove the current virtual environment. You need to specify the environment's name,
        which you can get from poetry env list.
        ```sh
@@ -81,14 +81,21 @@ gmail is almost full, time to cleanup:
         poetry env remove one_of_the_listed_envs  
        ```
 
-     - **Reinstall Dependencies**
+  - **Reinstall Dependencies**
        Run poetry install to create a new virtual environment and reinstall all dependencies (both default and development)
        based on the pyproject.toml and poetry.lock files.
         ```sh
         poetry install
         ```
-    - **path of the virtual environment associated with your project**
+  - **path of the virtual environment associated with your project**
       Use the poetry env info command.
       ```sh
       poetry env info --path
       ```
+  - **List all the packages installed in your project's**
+    ```sh
+    #  list the packages installed in your project's virtual environment
+    poetry show
+    # This command will list all the packages installed in your project's virtual environment, along with their versions
+    poetry show --tree
+   ```
