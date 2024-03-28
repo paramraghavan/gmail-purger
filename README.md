@@ -148,5 +148,59 @@ poetry env list
    poetry env use python3.9
    poetry shell
    ```
- 
-      
+  
+## poetry and requirements.txt
+Here's how you can work with Poetry and requirements.txt:
+Converting requirements.txt to Poetry: If you have an existing requirements.txt file and want to start using Poetry, you
+can create a pyproject.toml file (which is used by Poetry) with all the dependencies listed in from requirements.txt
+using the following command:
+
+```sh
+poetry init --no-interaction --dependency $(cat requirements.txt)
+````
+## Exporting dependencies to requirements.txt:
+ If you're using Poetry but need a requirements.txt file for some reason (
+e.g., for compatibility with tools that require it), you can export the dependencies from pyproject.toml to
+requirements.txt using the following command:
+
+```sh
+poetry export -f requirements.txt --output requirements.txt
+```
+
+## what is the right ptyhon packaging topol for you
+
+There are a number of tools available for managing dependencies in Python. In this article, we will compare most popular
+tools: conda, pipenv, virtualenv, poetry, pyenv, and pip. Each have their own strengths and weaknesses, and the best
+tool for you will depend on your specific needs.
+
+- **Conda** is a more mature tool that has been around for longer. It is also more widely used, especially in the data science
+community. Conda can be used to manage multiple Python versions, as well as other software packages. This makes it a
+good choice if you need to use different versions of Python for different projects, or if you need to install software
+packages that are not available in the Python Package Index (PyPI).
+
+- **Pipenv** is a newer tool that combines the functionality of pip and virtualenv into one command-line interface. It is
+designed to be more user-friendly than using pip and virtualenv separately, and it also includes features for managing
+dependencies and creating project files.
+
+- **Virtualenv** is a more established tool that is used to create isolated Python environments. This means that you can
+install different packages in different virtual environments without affecting the packages installed in your global
+Python environment. Virtualenv is a good choice if you need to create multiple isolated environments for different
+projects.
+
+- **Poetry** is a newer tool that is similar to Pipenv. It provides a more comprehensive solution for managing Python
+packages, including features for dependency management, packaging, and distribution. Poetry is a good choice if you need
+a tool that can handle all aspects of your Python project lifecycle.
+
+- **Pyenv** is a tool that allows you to manage different Python versions on your system. This can be useful if you need to
+use different versions of Python for different projects. Pyenv is not a dependency management tool, but it can be used
+in conjunction with other tools like Pipenv or Poetry.
+
+- **Pip** is the official package manager for Python. It is a simple and lightweight tool that can be used to install and
+manage Python packages. Pip is a good choice if you are just getting started with Python, or if you need a basic tool
+for managing dependencies.
+
+### Comparison matrix
+![img.png](img.png)
+
+> Referenced from here:
+> https://www.linkedin.com/pulse/comparison-various-tools-manage-python-packages-virtual-mukesh-kumar/
