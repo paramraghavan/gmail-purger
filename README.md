@@ -108,3 +108,43 @@ gmail is almost full, time to cleanup:
      poetry export -f requirements.txt --output requirements.txt --without dev
     ```
 
+    - **Visualize the dependency graph of your project (similar to pipenv graph)**
+      ```sh
+      poetry show --tree
+      ```
+      Above command will display a tree-like structure of your project's dependencies, showing how each package is related to
+      others in terms of dependency. It's a useful way to understand the hierarchy and relationships between the packages in your project.
+
+  - **Execute pytest# 
+    ```sh
+    # To run pytest with the -vv flag on the test/ directory
+    poetry run pytest -vv test/
+    ```
+
+  - **Activate a virtual env**
+    Navigate to the root directory of your project where the pyproject.toml file is located.
+    Run the following command:
+    ```sh
+    poetry shell
+    ```
+    Above command will spawn a new shell with the virtual environment activated. You'll notice that the
+    name of the virtual environment is usually displayed in your terminal prompt, indicating that the virtual environment is active.
+    To deactivate the virtual environment and return to your original shell, you can type exit or press Ctrl + D.
+    
+   - **Activate a virtual env from a list of  my configured envs**
+     ```sh
+     # list all venv's
+     poetry env list
+     
+     ## output
+     # my-project-py3.8 (Activated)
+     # my-project-py3.9
+ 
+     # exit from the current env using exit or ctrl+d 
+     
+     # switcching to my-project-py3.9
+     poetry env use python3.9
+     poetry shell
+     ```
+ 
+      
