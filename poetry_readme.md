@@ -34,15 +34,14 @@ for managing dependencies.
 ### Comparison matrix
 ![img.png](img.png)
 
-> Referenced from here:
+> Reference:
 > https://www.linkedin.com/pulse/comparison-various-tools-manage-python-packages-virtual-mukesh-kumar/
 
 
 
 
-## Start brand new  poetry project
-
->> reference: https://python-poetry.org/docs/basic-usage/
+## Start brand new poetry project
+>> Reference: https://python-poetry.org/docs/basic-usage/
 
 First, let’s create our new project, let’s call it poetry-demo:
 ```shell
@@ -100,7 +99,7 @@ As you can see, it takes a mapping of package names and version constraints. Poe
 the right set of files in package “repositories” that you register in the tool.poetry.source section, or on PyPI by
 default.
 
-## Also, instead of modifying the pyproject.toml file by hand, you can use the add command.
+### Also, instead of modifying the pyproject.toml file by hand, you can use the add command.
 ```shell
 $ poetry add pendulum
 ````
@@ -113,11 +112,18 @@ a pyproject.toml file in directory pre-existing-project:
 cd pre-existing-project
 poetry init
 ````
-## If you venv is active use pip
-If you venv is active use pip
+### If you venv is active use pip, you can udapte the toml file with the dependencies
+**Dump current dependencies** dump out a pip list --format=freeze. This could help with resolving any tricky packages
+that use different names in Conda versus PyPI.
+```shell
+pip list --format=freeze > curr_dependencies.txt
+```
+**update the pyproject.toml**
+Open the pyproject.toml and add all the dependencies from above file curr_depemdencies.txt  under the section
+**[tool.poetry.dependencies]** in file pyproject.toml
 
 
-## how to use poetry
+## Install poetry
 - **Installation**: First, you need to install Poetry. After installation, make sure to add Poetry's bin directory to your PATH.
   You can do this by running the following command in your terminal:
   ```sh
@@ -154,9 +160,9 @@ If you venv is active use pip
   poetry build
 ```
 - To publish your package to PyPI, use:
-    ```sh
-      poetry publish
-    ```
+  ```sh
+  poetry publish
+  ```
 
  > Remember to commit the pyproject.toml and poetry.lock files to your version control
  > system to ensure consistent environments for all contributors to your project.   
@@ -244,20 +250,20 @@ poetry env list
   To deactivate the virtual environment and return to your original shell, you can type exit or press Ctrl + D.
     
 - **Activate a virtual env from a list of  my configured envs**
-   ```sh
-   # list all venv's
-   poetry env list
-   
-   ## output
-   # my-project-py3.8 (Activated)
-   # my-project-py3.9
+ ```sh
+ # list all venv's
+ poetry env list
+ 
+ ## output
+ # my-project-py3.8 (Activated)
+ # my-project-py3.9
 
-   # exit from the current env using exit or ctrl+d 
-   
-   # switcching to my-project-py3.9
-   poetry env use python3.9
-   poetry shell
-   ```
+ # exit from the current env using exit or ctrl+d 
+ 
+ # switcching to my-project-py3.9
+ poetry env use python3.9
+ poetry shell
+ ```
   
 ## poetry and requirements.txt
 Here's how you can work with Poetry and requirements.txt:
@@ -322,26 +328,11 @@ Conda for environment management and Poetry for dependency management.
 
 
 ## **Replace Conda Environment with poetry:** 
-Activaßte Conda environment using the YAML file
+Activate Conda environment using the YAML file
 
 ```sh
 conda env create -f environment.yml
 conda activate your_env_name
 ```
 
-**Initialize Poetry:** In your project directory, initialize Poetry. This will create a pyproject.toml file for your
-project. If you already have a pyproject.toml file, you can skip this step.
-
-```sh
-poetry init
-```
-
-**Dump current dependencies**: dump out a pip list --format=freeze. This could help with resolving any tricky packages
-that use different names in Conda versus PyPI.
-```shell
-pip list --format=freeze > curr_dependencies.txt
-```
-
-**update the pyproject.toml**
-Open the pyproject.toml and add all the dependencies from above file curr_depemdencies.txt  under the section
-**[tool.poetry.dependencies]** in file pyproject.toml
+## build 
