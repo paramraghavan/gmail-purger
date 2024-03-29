@@ -142,7 +142,14 @@ Open the pyproject.toml and add all the dependencies from above file curr_depemd
   ```sh
   poetry add requests
   ```
-  
+ - **Lock Dependencies:** Once you've added your dependencies, you can lock them with:
+```shell
+poetry lock
+```
+Above will generate or update the poetry.lock file, locking the versions of your dependencies.
+The poetry.lock file ensures that everyone working on the project, or any environment where the project is deployed,
+will use the exact same versions of dependencies, avoiding the "it works on my machine" problem.
+
 - **Install Dependencies and create venv:** To install the dependencies specified in your pyproject.toml file, run:
   ```sh
   poetry install
