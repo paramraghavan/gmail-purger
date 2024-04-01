@@ -38,7 +38,26 @@ for managing dependencies.
 > https://www.linkedin.com/pulse/comparison-various-tools-manage-python-packages-virtual-mukesh-kumar/
 
 
+## Install poetry
+- **Installation**: First, you need to install Poetry. After installation, make sure to add Poetry's bin directory to your PATH.
+  You can do this by running the following command in your terminal:
+  ```shell
+  # on macos
+  brew install pipx
+  pipx install poetry
+  pipx ensurepath
+  ```
+  After installation, you should add the path to the Poetry executable to your system's PATH environment variable if it's not done automatically. 
+  - Linux and macOS: ~/.local/bin/poetry
+  - ls -l ~/.local/bin/poetry
+    /Users/userid/.local/bin/poetry -> /Users/userid/Library/Application Support/pypoetry/venv/bin/poetry
+  - echo 'export PATH="/Users/paramraghavan/Library/Application Support/pypoetry/venv/bin/poetry":$PATH' >> ~/.zshrc
+  - Windows: %USERPROFILE%\.poetry\bin\poetry
 
+  ```shell
+  # show poetry version
+  poetry --version
+  ```
 
 ## Start brand new poetry project
 >> Reference: https://python-poetry.org/docs/basic-usage/
@@ -112,43 +131,38 @@ a pyproject.toml file in directory pre-existing-project:
 cd pre-existing-project
 poetry init
 ````
-### If you venv is active use pip, you can udapte the toml file with the dependencies
-**Dump current dependencies** dump out a pip list --format=freeze. This could help with resolving any tricky packages
-that use different names in Conda versus PyPI.
-```shell
-pip list --format=freeze > curr_dependencies.txt
-```
-**update the pyproject.toml**
-Open the pyproject.toml and add all the dependencies from above file curr_depemdencies.txt  under the section
-**[tool.poetry.dependencies]** in file pyproject.toml
-
-
-## Install poetry
-- **Installation**: First, you need to install Poetry. After installation, make sure to add Poetry's bin directory to your PATH.
-  You can do this by running the following command in your terminal:
-  ```sh
-  curl -sSL https://install.python-poetry.org | python3 -
-  # show poetry version
-  poetry --version
-  ```
-- **Initialize Poetry:** Navigate to your project directory and initialize Poetry by running:
-  ```sh
-  poetry init
-  ```
-  Above command will guide you through creating a pyproject.toml file, which is used to manage your project's dependencies and settings.
-
 - **Adding dependencies** to your project using the poetry add command. This command updates the pyproject.toml file and also
   creates a poetry.lock file to lock the versions of your dependencies.For example, **to add the requests library**, you would run:
   ```sh
   poetry add requests
   ```
- - **Lock Dependencies:** Once you've added your dependencies, you can lock them with:
+
+## If you venv is active use pip, you can udapte the toml file with the dependencies
+**Dump current dependencies** dump out a pip list --format=freeze. This could help with resolving any tricky packages
+that use different names in Conda versus PyPI.
+```shell
+pip list --format=freeze > curr_dependencies.txt
+```
+- **Initialize Poetry:** Navigate to your project directory and initialize Poetry by running:
+  ```sh
+  poetry init
+  ```
+Above command will guide you through creating a pyproject.toml file, which is used to manage your project's dependencies and settings.
+
+**update the pyproject.toml**
+Open the pyproject.toml and add all the dependencies from above file curr_depemdencies.txt  under the section
+**[tool.poetry.dependencies]** in file pyproject.toml
+
+
+## Lock dependencies and Install, Create Virtual env
+
+- **Lock Dependencies:** Once you've added your dependencies,it will generate or update the poetry.lock file, locking
+  the versions of your dependencies. It will also flag any dependency issues it finds. The poetry.lock file ensures that 
+  everyone working on the project, or any environment where the project is deployed, will use the exact same versions of 
+  dependencies, avoiding the "it works on my machine" problem. You can lock them with:
 ```shell
 poetry lock
 ```
-Above will generate or update the poetry.lock file, locking the versions of your dependencies.
-The poetry.lock file ensures that everyone working on the project, or any environment where the project is deployed,
-will use the exact same versions of dependencies, avoiding the "it works on my machine" problem.
 
 - **Install Dependencies and create venv:** To install the dependencies specified in your pyproject.toml file, run:
   ```sh
@@ -156,6 +170,7 @@ will use the exact same versions of dependencies, avoiding the "it works on my m
   ```
   and this will create a virtual environment for your project and install the dependencies within it.
 
+## Running/Build/Publish Your Project
 - **Running Your Project:** To run your project within the Poetry-managed virtual environment, you can
   use the poetry run command. For example:
   ```sh
@@ -173,7 +188,8 @@ will use the exact same versions of dependencies, avoiding the "it works on my m
 
  > Remember to commit the pyproject.toml and poetry.lock files to your version control
  > system to ensure consistent environments for all contributors to your project.   
-      
+     
+## More options 
 -  **List all virtual environments managed by Poetry**, you can use the following command:
 ```sh
 poetry env list
