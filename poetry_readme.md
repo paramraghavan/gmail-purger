@@ -137,7 +137,7 @@ poetry init
   poetry add requests
   ```
 
-## If you venv is active use pip, you can udapte the toml file with the dependencies
+## If you venv is active use pip, you can update the toml file with the dependencies
 **Dump current dependencies** dump out a pip list --format=freeze. This could help with resolving any tricky packages
 that use different names in Conda versus PyPI.
 ```shell
@@ -357,5 +357,16 @@ Activate Conda environment using the YAML file
 conda env create -f environment.yml
 conda activate your_env_name
 ```
+- Got to section **If you venv is active use pip, you can update the toml file with the dependencies**, above
+- ```shell
+poetry install --remove-untracked
+```
 
-## build 
+
+## Manage multiple virtual envs
+```shell
+poetry env use <env name>
+poetry env info
+poetry env list
+poetry env remove <env name>
+```
