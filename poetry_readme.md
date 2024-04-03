@@ -114,6 +114,9 @@ will guarantee that your project is installable (and all dependencies claim supp
 pendulum = "^2.1"
 ```
 
+> In our example, we are requesting the pendulum package with the version constraint ^2.1. This means any version
+> greater or equal to 2.1.0 and less than 3.0.0 (>=2.1.0 <3.0.0).
+
 As you can see, it takes a mapping of package names and version constraints. Poetry uses this information to search for
 the right set of files in package “repositories” that you register in the tool.poetry.source section, or on PyPI by
 default.
