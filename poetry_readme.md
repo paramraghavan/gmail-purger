@@ -102,8 +102,7 @@ Poetry assumes your package contains a package with the same name as tool.poetry
 project. If this is not the case, populate tool.poetry.packages to specify your packages and their locations.
 
 Similarly, the traditional MANIFEST.in file is replaced by the tool.poetry.readme, tool.poetry.include, and
-tool.poetry.exclude sections. tool.poetry.exclude is additionally implicitly populated by your .gitignore. For full
-documentation on the project format, see the pyproject section of the documentation.
+tool.poetry.exclude sections. tool.poetry.exclude is additionally implicitly populated by your .gitignore.
 
 Poetry will require you to explicitly specify what versions of Python you intend to support, and its universal locking
 will guarantee that your project is installable (and all dependencies claim support for) all supported Python versions.
@@ -372,4 +371,53 @@ poetry env use <env name>
 poetry env info
 poetry env list
 poetry env remove <env name>
+```
+
+## How to use groups
+
+In Python Poetry, you can use groups to manage different sets of dependencies for different purposes, such as
+development, testing, or production. This feature is useful for organizing your project's dependencies in a more
+structured way. Here's an example of how you can use groups in a pyproject.toml file:
+
+```toml
+[tool.poetry]
+name = "my_project"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.25.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^6.2.2"
+black = "^20.8b1"
+
+[tool.poetry.group.test.dependencies]
+pytest-cov = "^2.11.1"
+
+```
+In this example:
+- The **[tool.poetry.dependencies]** section contains the main dependencies of the project, which are python and
+  requests.
+- The **[tool.poetry.group.dev.dependencies]** section contains development dependencies, such as pytest for testing and
+  black for code formatting.
+- The **[tool.poetry.group.test.dependencies]** section contains test-specific dependencies, such as pytest-cov for
+  measuring test coverage.
+
+To install the dependencies for a specific group, you can use the poetry install command with the --with option. For
+example, to install the _development_ dependencies, you can run:
+```shell
+poetry install --with dev
+```
+
+Similarly, to install the test dependencies, you can run:
+```shell
+poetry install --with test
+```
+
+You can also combine multiple groups, following will install the dependencies from both the dev and test groups. for example:
+```shell
+poetry install --with dev,test
 ```
