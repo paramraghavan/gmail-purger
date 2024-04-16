@@ -371,6 +371,10 @@ poetry env use <env name>
 poetry env info
 poetry env list
 poetry env remove <env name>
+poetry show -v
+#
+command line activate poetry env
+source /Users/paramraghavan/Library/Caches/pypoetry/virtualenvs/gmail-purger-kwFZ4Yic-py3.12/bin/activate
 ```
 
 ## How to use groups
@@ -417,7 +421,7 @@ Similarly, to install the test dependencies, you can run:
 poetry install --with test
 ```
 
-You can also combine multiple groups, following will install the dependencies from both the dev and test groups. for example:
+You can also combine multiple groups, following wpotryill install the dependencies from both the dev and test groups. for example:
 ```shell
 poetry install --with dev,test
 ```
